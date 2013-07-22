@@ -23,7 +23,7 @@ class OrtograBot(object):
     def __init__(self, mongodb_url=None):
         """Setup MongoDB databse, Twitter API and rules"""
         mongodb_url = os.environ.get("MONGOHQ_URL", mongodb_url)
-        self.debug = os.environ.get("DEBUG", True)
+        self.debug = bool(os.environ.get("DEBUG", True))
         client = pymongo.MongoClient(mongodb_url)
         self.db = client[mongodb_url.rsplit("/", 1)[1]]
         credentials = self.db.twitterCredentials.find_one()
