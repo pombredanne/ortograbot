@@ -101,12 +101,15 @@ class OrtograBot(object):
                     try:
                         if randint(1, 100) > 75:
                             # 75% from the message of the rule
-                            message = u"Recuerda: {}".format(rule["message"])
+                            message = u"Recuerda: {} {}".format(
+                                rule["message"],
+                                choice(self.emojis)
+                            )
+                            # Add a random emoji icon to messages to avoid
+                            # duplicated statuses
                             self.api.PostUpdate(message)
                         else:
                             # 25% a friendly message
-                            # Add a random emoji icon to avoid duplicated
-                            # messages
                             message = (u"Soy ortolibán, "
                                        u"tu corrector ortográfico "
                                        u"amigo {}".format(choice(self.emojis)))
