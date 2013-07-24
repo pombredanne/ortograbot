@@ -99,8 +99,8 @@ class OrtograBot(object):
                 # The 75% remaining, just tweet random messages
                 if not self.debug:
                     try:
-                        if randint(1, 100) > 75:
-                            # 75% from the message of the rule
+                        if randint(1, 100) > 85:
+                            # 85% from the message of the rule
                             message = u"Recuerda: {} {}".format(
                                 rule["message"],
                                 choice(self.emojis)
@@ -109,7 +109,7 @@ class OrtograBot(object):
                             # duplicated statuses
                             self.api.PostUpdate(message)
                         else:
-                            # 25% a friendly message
+                            # 15% a friendly message
                             message = (u"Soy ortolibán, "
                                        u"tu corrector ortográfico "
                                        u"amigo {}".format(choice(self.emojis)))
