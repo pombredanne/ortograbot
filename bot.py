@@ -11,6 +11,7 @@ from datetime import datetime
 from datetime import timedelta
 from random import choice
 
+logging.basicConfig()
 logger = logging.getLogger(__name__)
 
 
