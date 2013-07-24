@@ -75,6 +75,10 @@ class OrtograBot(object):
             }
         ]
         self.punctuation = re.compile(r"[ \.,\?\!¡¿\n\t\-]+")
+        self.emojis = [
+            u"🐭", u"🐮", u"🐱", u"🐵", u"😁", u"😂", u"😃", u"😄", u"😅",
+            u"😆", u"😇", u"😈", u"😉", u"😊", u"😋", u"😌", u"😍", u"😎",
+            u"😏", u"😰", u"😱", u"😲", u"😳", u""]
 
     def run_rule(self):
         """Run one random rule and reply to the twitter user if needed"""
@@ -101,8 +105,11 @@ class OrtograBot(object):
                             self.api.PostUpdate(message)
                         else:
                             # 25% a friendly message
+                            # Add a random emoji icon to avoid duplicated
+                            # messages
                             message = (u"Soy ortolibán, "
-                                       u"tu corrector ortográfico amigo.")
+                                       u"tu corrector ortográfico "
+                                       u"amigo {}".format(choice(self.emojis)))
                             self.api.PostUpdate(message)
                     except Exception:
                         logger.error("Unexpected error: %s",
