@@ -1,4 +1,4 @@
 ortograbot
 ==========
 
-Your Ortography Bot Friend.
+Your Orthography Bot Friend.
