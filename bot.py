@@ -10,6 +10,7 @@ import urllib
 from datetime import datetime
 from datetime import timedelta
 from random import choice
+from random import randint
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
@@ -48,6 +49,27 @@ class OrtograBot(object):
                            u"por lo que siempre lleva tilde → "
                            u"http://buscon.rae.es/dpd/?key=tilde#113",
                 "lang": u"es",
+            },
+            {
+                "search": u"corazon",
+                "message": u"corazón es aguda acabada en -n, "
+                           u"por lo que siempre lleva tilde → "
+                           u"http://buscon.rae.es/dpd/?key=tilde#111",
+                "lang": u"es",
+            },
+            {
+                "search": u"bicep",
+                "message": u"la palabra «bicep» no existe, "
+                           u"es bíceps, llana y acentuada por acabar en -s → "
+                           u"http://lema.rae.es/dpd/?key=b%C3%ADceps",
+                "lang": u"es",
+            },
+            {
+                "search": u"biceps",
+                "message": u"bíceps es llana acabada en -s, "
+                           u"por lo que siempre lleva tilde → "
+                           u"http://lema.rae.es/dpd/?key=b%C3%ADceps",
+                "lang": u"es",
             }
         ]
         self.punctuation = re.compile(r"[ \.,\?\!¡¿\n\t\-]+")
@@ -64,6 +86,25 @@ class OrtograBot(object):
             if (rule["search"] not in self.punctuation.split(text_lower)
                     or self.username.lower() in text_lower
                     or langid.classify(status_obj.text)[0] != rule["lang"]):
+                continue
+            # To guarantee some human-like behaviour,
+            # it only replies 25% of the time
+            if randint(1, 100) > 75:
+                # The 75% remaining, just tweet random messages
+                if not self.debug:
+                    try:
+                        if randint(1, 100) > 75:
+                            # 75% from the message of the rule
+                            message = u"Recuerda: {}".format(rule["message"])
+                            self.api.PostUpdate(message)
+                        else:
+                            # 25% a friendly message
+                            message = (u"Soy ortolibán, "
+                                       u"tu corrector ortográfico amigo.")
+                            self.api.PostUpdate(message)
+                    except Exception:
+                        logger.error("Unexpected error: %s",
+                                     sys.exc_info()[0:2])
                 continue
             post_time = datetime.strptime(status_obj.created_at,
                                           '%a %b %d %H:%M:%S +0000 %Y')

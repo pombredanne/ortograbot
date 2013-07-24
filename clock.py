@@ -5,9 +5,9 @@ from bot import OrtograBot
 sched = Scheduler()
 
 
-@sched.interval_schedule(minutes=5)
+@sched.interval_schedule(minutes=30)
 def rules_job():
-    """Launch the main job very minute"""
+    """Launch the main job"""
     OrtograBot().run_rule()
 
 sched.start()
