@@ -76,6 +76,8 @@ class OrtograBot(object):
                 "reply_time": now,
                 "search": rule["search"],
                 "lang": rule["lang"],
+                "place": status_obj.place,
+                "coordinates": status_obj.coordinates,
             }
             user_already_messaged = self.db.messaged.find_one({
                 "screen_name": reply_to["screen_name"],
