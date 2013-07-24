@@ -1,4 +1,4 @@
 ortograbot
 ==========
 
-The Spanish Ortography Bot
+Your Orthography Bot Friend.
