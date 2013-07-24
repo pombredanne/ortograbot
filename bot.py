@@ -60,13 +60,15 @@ class OrtograBot(object):
             {
                 "search": u"bicep",
                 "message": u"la palabra «bicep» no existe, "
-                           u"es bíceps, llana y con tilde por acabar en -s → "
+                           u"es bíceps, llana y con tilde por acabar en -s "
+                           u"precedida de consonante → "
                            u"http://lema.rae.es/dpd/?key=b%C3%ADceps",
                 "lang": u"es",
             },
             {
                 "search": u"biceps",
-                "message": u"bíceps es llana acabada en -s, "
+                "message": u"bíceps es llana y acabada en -s "
+                           u"precedida de consonante, "
                            u"por lo que siempre lleva tilde → "
                            u"http://lema.rae.es/dpd/?key=b%C3%ADceps",
                 "lang": u"es",
