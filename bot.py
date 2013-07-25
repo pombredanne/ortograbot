@@ -91,6 +91,8 @@ class OrtograBot(object):
             text_lower = status_obj.text.lower()
             if (rule["search"] not in self.punctuation.split(text_lower)
                     or self.username.lower() in text_lower
+                    or status_obj.in_reply_to_status_id
+                    or status_obj.retweeted
                     or langid.classify(status_obj.text)[0] != rule["lang"]):
                 continue
             # To guarantee some human-like behaviour,
